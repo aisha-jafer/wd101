@@ -1,55 +1,200 @@
-<html>
-  <html lang="en">
-    <head>
-      <style>
-        input#name:invalid:focus {
-          border: 1px solid red;
-        }
-        input#email:invalid:focus {
-          border: 1px solid red;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>registration Form</h1>
-      <form>#form controls</form>
-      <form id="user-form">
-        <label for="name">Name</label>
-        <input required type="text" id="name" name="name" />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        <label for="email">Email</label>
-        <input required type="email" id="email" name="email" />
+      .form-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        margin-bottom: 30px;
+      }
 
-        <label for="password">Password</label>
-        <input required type="password" id="password" name="password" />
+      .form-container h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #333;
+      }
 
-        <label for="dob">Date of Birth</label>
-        <input type="date" id="dob" name="dob" />
+      .form-group {
+        margin-bottom: 20px;
+      }
 
-        <input type="checkbox" id="acceptTerms" name="acceptTerms" />
-        <label for="acceptTerms">Accept Terms & Conditions</label>
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="date"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+        background-color: #f9f9f9;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      input[type="checkbox"] {
+        margin-right: 10px;
+        transform: scale(1.2);
+      }
+
+      .checkbox-label {
+        color: #555;
+        font-weight: normal;
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #218838;
+      }
+
+      .table-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 800px;
+      }
+
+      .table-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+        color: #333;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .error {
+        color: #dc3545;
+        font-size: 12px;
+        margin-top: 5px;
+      }
+
+      .success {
+        color: #28a745;
+        font-size: 14px;
+        margin-top: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Registration Form</h2>
+      <form id="registrationForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+          <div class="error" id="nameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+          <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+          <div class="error" id="passwordError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required />
+          <div class="error" id="dobError"></div>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="terms" name="terms" required />
+          <label for="terms" class="checkbox-label"
+            >Accept Terms & Conditions</label
+          >
+          <div class="error" id="termsError"></div>
+        </div>
 
         <button type="submit">Submit</button>
+        <div class="success" id="successMessage"></div>
       </form>
-      <div id="user-entries">
-        <h2>Entries</h2>
-      </div>
-      <script>
-        const email = document.getElementById("email");
-        email.addEventListener("input", () => validate(email));
+    </div>
 
-        const submit = document.getElementById("submit");
-        submit.addEventListener("click", () => validate(email));
-        function validate(element) {
-          if (element.validity.typeMismatch) {
-            element.setCustomValidity("The email not in right format");
-            element.reportValidity();
-          } else {
-            element.setCustomValidity("");
-          }
-        }
-      </script>
-      <script src="./index.js"></script>
-    </body>
-  </html>
+    <div class="table-container">
+      <h2>Entries</h2>
+      <table id="entriesTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Dob</th>
+            <th>Accepted terms?</th>
+          </tr>
+        </thead>
+        <tbody id="entriesTableBody">
+          <!-- Entries will be populated here -->
+        </tbody>
+      </table>
+    </div>
+    <script src="index.js"></script>
+  </body>
 </html>
